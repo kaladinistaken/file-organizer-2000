@@ -2,6 +2,7 @@ import { createAnthropic } from "@ai-sdk/anthropic";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createAmazonBedrock } from "@ai-sdk/amazon-bedrock";
+import { modelsOverride } from "./models-override";
 
 const DEFAULT_MODEL = "gpt-4o";
 
@@ -74,16 +75,16 @@ const models = {
 };
 
 export const getModel = (name: string) => {
-  if (!models[name]) {
+  if (!modelsOverride[name]) {
     console.log(`Model ${name} not found`);
     console.log(`Defaulting to ${DEFAULT_MODEL}`);
-    return models[DEFAULT_MODEL];
+    return modelsOverride[DEFAULT_MODEL];
   }
   console.log(`Using model ${name}`);
 
-  return models[name];
+  return modelsOverride[name];
 };
 
 export const getAvailableModels = () => {
-  return Object.keys(models);
+  return Object.keys(modelsOverride);
 };
