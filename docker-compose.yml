@@ -9,10 +9,12 @@ services:
       caddy: organize.zagreus.eu.org
       caddy.reverse_proxy: "{{upstreams 3000}}"
     environment:
+      - ELECTRON_API_KEY=${ELECTRON_API_KEY}
       - DDC_API_KEY=${DDC_API_KEY}
       - ZUKI_API_KEY=${ZUKI_API_KEY}
       - FRESED_API_KEY=${FRESED_API_KEY}
       - HELIX_API_KEY=${HELIX_API_KEY}
+      - NOBRAND_API_KEY=${NOBRAND_API_KEY}
       - GROQ_API_KEY=${GROQ_API_KEY}
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
       - SOLO_API_KEY=${SOLO_API_KEY}

@@ -5,6 +5,22 @@ import { createAmazonBedrock } from "@ai-sdk/amazon-bedrock";
 const DEFAULT_MODEL = "gpt-4o";
 
 const models = {
+  "electron-gpt-4o-mini": createOpenAI({
+    apiKey: process.env.ELECTRON_API_KEY,
+    baseURL: "https://api.electronhub.top/v1",
+  })("gpt-4o-mini"),
+  "electron-gpt-4o": createOpenAI({
+    apiKey: process.env.ELECTRON_API_KEY,
+    baseURL: "https://api.electronhub.top/v1",
+  })("gpt-4o-2024-11-20"),
+  "electron-claude-3-5-sonnet": createOpenAI({
+    apiKey: process.env.ELECTRON_API_KEY,
+    baseURL: "https://api.electronhub.top/v1",
+  })("claude-3-5-sonnet-20241022"),
+  "electron-deepseek-v3": createOpenAI({
+    apiKey: process.env.ELECTRON_API_KEY,
+    baseURL: "https://api.electronhub.top/v1",
+  })("deepseek-v3"),
   "gpt-4o": createOpenAI({
     apiKey: process.env.DDC_API_KEY,
     baseURL: "https://devsdocode-openai-unlimited-v2.hf.space/v2",
@@ -36,6 +52,14 @@ const models = {
   "helix-gpt-4o": createOpenAI({
     apiKey: process.env.HELIX_API_KEY,
     baseURL: "https://helixmind.online/v1",
+  })("gpt-4o-2024-11-20"),
+  "nobrand-gpt-4o-mini": createOpenAI({
+    apiKey: process.env.NOBRAND_API_KEY,
+    baseURL: "https://nobrandai.com/v1",
+  })("gpt-4o-mini"),
+  "nobrand-gpt-4o": createOpenAI({
+    apiKey: process.env.NOBRAND_API_KEY,
+    baseURL: "https://nobrandai.com/v1",
   })("gpt-4o-2024-11-20"),
   "llama-3.3-70b-versatile": createOpenAI({
     apiKey: process.env.GROQ_API_KEY,
