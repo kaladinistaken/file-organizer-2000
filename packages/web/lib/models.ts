@@ -1,36 +1,51 @@
-import { createAnthropic } from "@ai-sdk/anthropic";
 import { createOpenAI } from "@ai-sdk/openai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { createAmazonBedrock } from "@ai-sdk/amazon-bedrock";
-import { modelsOverride } from "./models-override";
 
 const DEFAULT_MODEL = "gpt-4o";
 
 const models = {
   "gpt-4o": createOpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.DDC_API_KEY,
+    baseURL: "https://devsdocode-openai-unlimited-v2.hf.space/v2",
   })("gpt-4o"),
-  "gpt-4o-2024-08-06": createOpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  })("gpt-4o-2024-08-06"),
-  "gpt-4o-mini": createOpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  "gpt-4o-2024-05-13": createOpenAI({
+    apiKey: process.env.DDC_API_KEY,
+    baseURL: "https://devsdocode-openai-unlimited-v2.hf.space/v2",
+  })("gpt-4o-2024-05-13"),
+  "zuki-gpt-4o-mini": createOpenAI({
+    apiKey: process.env.ZUKI_API_KEY,
+    baseURL: "https://api.zukijourney.com/v1",
   })("gpt-4o-mini"),
-  "claude-3-5-sonnet-20240620": createAnthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-  })("claude-3-5-sonnet-20240620"),
-  "claude-3-5-sonnet-20241022": createAnthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-  })("claude-3-5-sonnet-20241022"),
-  "claude-3-5-haiku-20241022": createAnthropic({
-    apiKey: process.env.ANTHROPIC_API_KEY,
-  })("claude-3-5-haiku-20241022"),
+  "zuki-gpt-4o": createOpenAI({
+    apiKey: process.env.ZUKI_API_KEY,
+    baseURL: "https://api.zukijourney.com/v1",
+  })("gpt-4o"),
+  "fresed-gpt-4o-mini": createOpenAI({
+    apiKey: process.env.FRESED_API_KEY,
+    baseURL: "https://fresedgpt.space/v1",
+  })("gpt-4o-mini"),
+  "fresed-gpt-4o": createOpenAI({
+    apiKey: process.env.FRESED_API_KEY,
+    baseURL: "https://fresedgpt.space/v1",
+  })("gpt-4o"),
+  "helix-gpt-4o-mini": createOpenAI({
+    apiKey: process.env.HELIX_API_KEY,
+    baseURL: "https://helixmind.online/v1",
+  })("gpt-4o-mini"),
+  "helix-gpt-4o": createOpenAI({
+    apiKey: process.env.HELIX_API_KEY,
+    baseURL: "https://helixmind.online/v1",
+  })("gpt-4o-2024-11-20"),
+  "llama-3.3-70b-versatile": createOpenAI({
+    apiKey: process.env.GROQ_API_KEY,
+    baseURL: "https://api.groq.com/openai/v1",
+  })("llama-3.3-70b-versatile"),
   "gemini-2.0-flash-exp": createGoogleGenerativeAI({
     apiKey: process.env.GOOGLE_API_KEY,
   })("gemini-2.0-flash-exp", {
     useSearchGrounding: true,
   }),
-
   "gemini-1.5-pro-search": createGoogleGenerativeAI({
     apiKey: process.env.GOOGLE_API_KEY,
   })("gemini-1.5-pro"),
@@ -75,16 +90,16 @@ const models = {
 };
 
 export const getModel = (name: string) => {
-  if (!modelsOverride[name]) {
+  if (!models[name]) {
     console.log(`Model ${name} not found`);
     console.log(`Defaulting to ${DEFAULT_MODEL}`);
-    return modelsOverride[DEFAULT_MODEL];
+    return models[DEFAULT_MODEL];
   }
   console.log(`Using model ${name}`);
 
-  return modelsOverride[name];
+  return models[name];
 };
 
 export const getAvailableModels = () => {
-  return Object.keys(modelsOverride);
+  return Object.keys(models);
 };
