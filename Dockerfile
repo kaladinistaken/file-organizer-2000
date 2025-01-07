@@ -16,6 +16,9 @@ WORKDIR /app/packages/web
 # Install the application dependencies
 RUN pnpm install
 
+# Disable telemetry
+RUN pnpm exec next telemetry disable
+
 # Build the Next.js application
 RUN pnpm run build:self-host
 
