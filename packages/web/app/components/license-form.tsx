@@ -1,5 +1,6 @@
 "use client";
 
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,9 +13,11 @@ import { Input } from "@/components/ui/input";
 import { useEffect, useState } from "react";
 import { createLicenseKey, isPaidUser } from "../actions";
 import CheckoutButton from "@/components/ui/checkout-button";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from"@clerk/nextjs";
 
-const LicenseForm = () => {
+interface LicenseFormProps {}
+
+const LicenseForm: React.FC<LicenseFormProps> = () => {
   const [licenseKey, setLicenseKey] = useState<string>("");
   const [isPaid, setIsPaid] = useState(false);
   async function onCreate(formData: FormData) {
