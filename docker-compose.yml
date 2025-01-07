@@ -1,10 +1,10 @@
 services:
-  app:
+  file-organizer:
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
+    networks:
+      - caddy
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - SOLO_API_KEY=${SOLO_API_KEY}
@@ -16,3 +16,7 @@ services:
       - MODEL_FOLDERS=${MODEL_FOLDERS}
 
       - OLLAMA_API_URL=${OLLAMA_API_URL}
+
+networks:
+  caddy:
+    external: true
